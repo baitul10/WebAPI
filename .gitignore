@@ -1,0 +1,5 @@
+**/.vs
+**/.log
+**/bin
+**/obj
+appsettings.json
