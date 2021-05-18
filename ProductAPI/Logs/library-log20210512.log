@@ -1,0 +1,9 @@
+2021-05-12 01:14:04.624 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentException: The path in 'value' must start with '/'. (Parameter 'value')
+   at Microsoft.AspNetCore.Http.PathString..ctor(String value)
+   at Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.<>c__DisplayClass6_0.<<UseStatusCodePagesWithReExecute>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-05-12 14:19:03.196 +06:00 [WRN] Invalid password for user 8f9f4e3c-3e3b-4a21-a0f9-a94ae8ea1c0f.
+2021-05-12 14:19:03.275 +06:00 [WRN] User 8f9f4e3c-3e3b-4a21-a0f9-a94ae8ea1c0f failed to provide the correct password.

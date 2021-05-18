@@ -1,4 +1,3 @@
-using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -6,9 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using ProductAPI.Extensions;
 using ProductAPI.Mapper;
+using ProductAPI.MiddleWare;
 
 namespace ProductAPI
 {
@@ -36,29 +35,33 @@ namespace ProductAPI
                 options.UseOracle(connectionString, x => x.UseOracleSQLCompatibility("11"));
             });
 
-            services.AddScoped<IUom, Uom>();
+            services.AddApplicationServices();
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(Configuration);
 
             services.AddSwaggerServices();
 
             services.AddAutoMapper(typeof(MapProfiles));
-
-            services.AddMvc();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            app.UseMiddleware<ExceptionMiddleWare>();
+
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
